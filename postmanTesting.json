@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "f564a588-7514-4514-8722-81fb50b07ac5",
+		"name": "m295KaiWenninger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20808021"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/tasks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Statuscode ist 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Überprüfe Antwortdaten\", function () {",
+							"    pm.response.json().forEach(function (task) {",
+							"        pm.expect(task).to.have.property('id');",
+							"        pm.expect(task).to.have.property('title');",
+							"        pm.expect(task).to.have.property('stardate');",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/tasks/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Aufgabe löschen\", function () {",
+							"    pm.sendRequest('/tasks/1', 'DELETE', function (err, response) {",
+							"        pm.expect(response.status).to.equal(200);",
+							"",
+							"        pm.expect(tasks.filter(task => task.id === 1)).to.be.empty;",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/tasks/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

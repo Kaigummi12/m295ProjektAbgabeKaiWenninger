@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: Modul295 Task API
+  version: 1.0.0
+paths:
+  /:
+    get:
+      summary: Receive all tasks
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    post:
+      summary: Create a new task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: Task created successfully
+        '422':
+          description: Invalid request body
+  /tasks/{id}:
+    get:
+      summary: Get a task by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task not found
+    put:
+      summary: Update a task by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '200':
+          description: Task updated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task not found
+        '422':
+          description: Invalid request body
+    delete:
+      summary: Delete a task by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        '200':
+          description: Task deleted successfully
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Abfall entsorgen
+        startdate:
+          type: string
+          example: '22-mai-2022'
+        enddate:
+          type: string
+          example: '25-mai-2022'
+    TaskInput:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Abfall entsorgen
+        startdate:
+          type: string
+          example: '22-mai-2022'
+        enddate:
+          type: string
+          example: '25-mai-2022'
