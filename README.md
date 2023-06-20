@@ -17,7 +17,7 @@ node index.js
 Now the project should be up and running. Make sure you are in the right directory src. 
 
 ## Documentation
-You can find the Swagger documentation in my project it is called dokuSwagger.yml or dokuSwagger.html
+You can find the Swagger documentation in my project it is called dokuSwagger.yml
 GitRepo: https://github.com/Kaigummi12/m295ProjektAbgabeKaiWenninger
 
 
